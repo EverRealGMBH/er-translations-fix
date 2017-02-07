@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "fix-translations": "./bin/fix-translations.js"
+    "translations-fix": "./bin/translations-fix"
   },
   "main" : "./index.js",
   "preferGlobal": true,
