@@ -1,0 +1,25 @@
+{
+  "name": "er-translations-fix",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "fix-translations": "./bin/fix-translations.js"
+  },
+  "main" : "./index.js",
+  "preferGlobal": true,
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EverRealGMBH/er-translations-fix.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EverRealGMBH/er-translations-fix/issues"
+  },
+  "homepage": "https://github.com/EverRealGMBH/er-translations-fix#readme",
+  "dependencies": {
+    "glob": "^7.1.1"
+  }
+}
