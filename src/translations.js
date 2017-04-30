@@ -56,9 +56,8 @@ function deleteExtraKeys(baseObject, object) {
   const objectKeys = Object.keys(object) || [];
 
   objectKeys.forEach(prop => {
-    if (!baseKeys[prop]) {
-      delete objectKeys[prop];
-      debug(`DELETED KEY: ${prop}`);
+    if (!baseKeys.find(k => k === prop)) {
+      console.log(`DELETED KEY: ${prop}`);
     }
   });
 
