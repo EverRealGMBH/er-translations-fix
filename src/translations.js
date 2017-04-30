@@ -43,7 +43,7 @@ function getSortedObject(object) {
 
 function fillMissingKeys(baseObject, object) {
   Object.keys(baseObject).forEach(baseKey => {
-    if (!object[baseKey]) {
+    if (typeof object[baseKey] === 'undefined') {
       object[baseKey] = '';
       debug(`ADDED KEY: ${baseKey}`);
     }
