@@ -45,7 +45,7 @@ function fillMissingKeys(baseObject, object) {
   Object.keys(baseObject).forEach(baseKey => {
     if (!object[baseKey]) {
       object[baseKey] = '';
-      debug(`ADDED KEY: ${prop}`);
+      debug(`ADDED KEY: ${baseKey}`);
     }
   });
   return object;
