@@ -53,7 +53,7 @@ function fillMissingKeys(baseObject, object) {
 
 function deleteExtraKeys(baseObject, object) {
   const baseKeys = Object.keys(baseObject) || [];
-  const objectKeys = Object.keys(baseObject) || [];
+  const objectKeys = Object.keys(object) || [];
 
   objectKeys.forEach(prop => {
     if (!baseKeys[prop]) {
