@@ -1,5 +1,6 @@
 const sync = require('glob').sync;
 const fs = require('fs');
+const debug = require('debug')('er-translations-fixer');
 
 module.exports = {
   processTranslationFiles,
@@ -12,10 +13,17 @@ function processTranslationFiles({baseFileName = '', filePath = ''}) {
   const readFile = filename => JSON.parse(fs.readFileSync(filename, 'utf8'));
   const fileMap = files.map(filename => [filename, readFile(filename)]);
   const baseFile = readFile(files.find(filename => filename.indexOf(baseFileName) > -1));
-  const processJson = content => getSortedObject(fillMissingKeys(baseFile, content));
-  const getFinalStringContent = content => JSON.stringify(processJson(content), null, 2) + '\n';
+  const getFinalStringContent = content => JSON.stringify(mergeKeys(baseFile, content), null, 2) + '\n';
 
   fileMap.forEach(([filename, content]) => fs.writeFileSync(filename, getFinalStringContent(content), 'utf8'));
+}
+
+function mergeKeys(baseObject, object) {
+  let newObject = object;
+  newObject = fillMissingKeys(baseObject, newObject);
+  newObject = deleteExtraKeys(baseObject, newObject);
+  newObject = getSortedObject(newObject);
+  return newObject;
 }
 
 function getSortedObject(object) {
@@ -37,7 +45,22 @@ function fillMissingKeys(baseObject, object) {
   Object.keys(baseObject).forEach(baseKey => {
     if (!object[baseKey]) {
       object[baseKey] = '';
+      debug(`ADDED KEY: ${prop}`);
     }
   });
+  return object;
+}
+
+function deleteExtraKeys(baseObject, object) {
+  const baseKeys = Object.keys(baseObject) || [];
+  const objectKeys = Object.keys(baseObject) || [];
+
+  objectKeys.forEach(prop => {
+    if (!baseKeys[prop]) {
+      delete objectKeys[prop];
+      debug(`DELETED KEY: ${prop}`);
+    }
+  });
+
   return object;
 }
